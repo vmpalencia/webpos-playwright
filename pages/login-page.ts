@@ -30,11 +30,11 @@ export class LoginPage {
     get emailField(): Locator { return this.page.getByRole('textbox', { name: 'Email' }) }
     get passwordField(): Locator { return this.page.getByRole('textbox', { name: 'Password' }) }
     get loginBtn(): Locator { return this.page.getByRole('button', { name: 'Login' }) }
-    get errorMsg(): Locator { return this.page.locator('.css-18s5xoe') }
+    get errorMsg(): Locator { return this.page.locator('.css-18s5xoe') } // change
     get emailErrorMsg(): Locator { return this.page.getByText('email is a required field') }
     get passwordErrorMsg(): Locator { return this.page.getByText('password must be at least 5 characters') }
     get selectLocation(): Locator { return this.page.getByRole('button', { name: 'Select' }).first() }
-    get userAvatar(): Locator { return this.page.locator('.css-13ez59u') }
+    get userAvatar(): Locator { return this.page.locator('.css-13ez59u') } // change
     get signOutBtn(): Locator { return this.page.getByRole('menuitem', { name: 'Sign Out' }) }
 
     async goto(){
