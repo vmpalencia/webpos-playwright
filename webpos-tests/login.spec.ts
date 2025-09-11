@@ -8,12 +8,12 @@ test.describe('Login Tests', () => {
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page)
         await loginPage.goto()
-        await expect(page).toHaveURL('/\/login(\/|$)/')
+        await expect(page).toHaveURL(/\/login(\/|$)/)
     })
 
     test('[TC-101] Login using valid credentials', async ({ page }) => {
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
-        await expect(page).toHaveURL('/\/locations(\/|$)/')
+        await expect(page).toHaveURL(/\/locations(\/|$)/)
     })
 
     test('[TC-102] Login using invalid credentials', async () => {
@@ -35,6 +35,6 @@ test.describe('Login Tests', () => {
     test('[TC-105] Logout user', async ({ page }) => {
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
         await loginPage.logoutUser()
-        await expect(page).toHaveURL('/\/login(\/|$)/')
+        await expect(page).toHaveURL(/\/login(\/|$)/)
     })
 })
