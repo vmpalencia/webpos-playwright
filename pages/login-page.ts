@@ -34,9 +34,9 @@ export class LoginPage {
     get errorMsg(): Locator { return this.page.locator('.css-18s5xoe') } // change
     get emailErrorMsg(): Locator { return this.page.getByText('email is a required field') }
     get passwordErrorMsg(): Locator { return this.page.getByText('password must be at least 5 characters') }
-    get selectLocation(): Locator { return this.page.getByRole('button', { name: 'Select' }).first() }
+    get selectLocation(): Locator { return this.page.locator('.css-1s8xa5e').first() } // change
     get userAvatar(): Locator { return this.page.locator('.css-13ez59u') } // change
-    get signOutBtn(): Locator { return this.page.locator('.css-lxqw2c') }
+    get signOutBtn(): Locator { return this.page.locator('.css-lxqw2c') } // change
 
     async goto(){
         await this.page.goto('/login')
@@ -46,12 +46,12 @@ export class LoginPage {
     async login(email: string = "", password: string = ""){
         await this.emailField.fill(email)
         await this.passwordField.fill(password)
-        // await this.loginBtn.click()
-        await Promise.all([
-            this.page.waitForLoadState('networkidle'),
-            this.loginBtn.click()
-        ])
-        return this
+        await this.loginBtn.click()
+        // await Promise.all([
+        //     this.page.waitForLoadState('networkidle'),
+        //     this.loginBtn.click()
+        // ])
+        // return this
     }
 
     async clickLoginBtn(){
