@@ -13,6 +13,7 @@ test.describe('Login Tests', () => {
 
     test('[TC-101] Login using valid credentials', async ({ page }) => {
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
+        await page.waitForURL(/\/locations\//, { timeout: 15000 })
         await expect(page).toHaveURL('/locations/')
     })
 
@@ -34,7 +35,10 @@ test.describe('Login Tests', () => {
 
     test('[TC-105] Logout user', async ({ page }) => {
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
+        await page.waitForURL(/\/locations\//, { timeout: 15000 })
+        await expect(page).toHaveURL('/locations/')
         await loginPage.logoutUser()
+        await page.waitForURL(/\/login\//, { timeout: 15000 })
         await expect(page).toHaveURL('/login/')
     })
 })
