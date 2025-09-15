@@ -36,7 +36,7 @@ export class LoginPage {
     get passwordErrorMsg(): Locator { return this.page.getByText('password must be at least 5 characters') }
     get selectLocation(): Locator { return this.page.getByRole('button', { name: 'Select' }).first() }
     get userAvatar(): Locator { return this.page.locator('.css-13ez59u') } // change
-    get signOutBtn(): Locator { return this.page.getByRole('menuitem', { name: 'Sign Out' }) }
+    get signOutBtn(): Locator { return this.page.locator('.css-lxqw2c') }
 
     async goto(){
         await this.page.goto('/login')
