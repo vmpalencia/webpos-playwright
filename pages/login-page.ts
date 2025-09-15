@@ -39,7 +39,7 @@ export class LoginPage {
     get signOutBtn(): Locator { return this.page.locator('.css-lxqw2c') } // change
 
     async goto(){
-        await this.page.goto('/login')
+        await this.page.goto('/login/')
         await expect(this.loginBtn).toBeVisible()
     }
 

@@ -26,9 +26,11 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: process.env.BASE_URL || 'https://pos-uat.bychronos.com/',
+    headless: true,                         // explicit for CI clarity
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure'
+    video: 'retain-on-failure',
+    timezoneId: 'UTC', 
   },
 
   /* Configure projects for major browsers */
