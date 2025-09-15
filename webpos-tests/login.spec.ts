@@ -12,7 +12,7 @@ test.describe('Login Tests', () => {
     })
 
     test('[TC-101] Login using valid credentials', async ({ page }) => {
-        await loginPage.login(process.env.VALID_USER_EMAIL!, process.env.VALID_USER_PASSWORD!)
+        await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
         await expect(page).toHaveURL(/\/locations(\/|$)/)
     })
 
@@ -33,7 +33,7 @@ test.describe('Login Tests', () => {
     })
 
     test('[TC-105] Logout user', async ({ page }) => {
-        await loginPage.login(process.env.VALID_USER_EMAIL!, process.env.VALID_USER_PASSWORD!)
+        await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
         await loginPage.logoutUser()
         await expect(page).toHaveURL(/\/login(\/|$)/)
     })

@@ -1,4 +1,5 @@
 import { type Locator, type Page, expect } from '@playwright/test'
+import { userCredentials } from '../fixtures/user-data'
 
 export class LoginPage {
     // readonly page: Page
@@ -42,7 +43,7 @@ export class LoginPage {
         await expect(this.loginBtn).toBeVisible()
     }
 
-    async login(email: string, password: string){
+    async login(email: string = "", password: string = ""){
         await this.emailField.fill(email)
         await this.passwordField.fill(password)
         // await this.loginBtn.click()
