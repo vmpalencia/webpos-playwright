@@ -35,10 +35,9 @@ test.describe('Login Tests', () => {
 
     test('[TC-105] Logout user', async ({ page }) => {
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
-        await page.waitForURL(/\/locations\//, { timeout: 30000 })
-        await expect(page).toHaveURL('/locations/')
+        await expect(page).toHaveURL(/\/locations\/?$/, { timeout: 20000 })
         await loginPage.logoutUser()
-        await page.waitForURL(/\/login\//, { timeout: 30000 })
-        await expect(page).toHaveURL('/login/')
+        // await page.waitForURL(/\/login\//, { timeout: 30000 })
+        await expect(page).toHaveURL(/\/login\/?$/, { timeout: 20000 })
     })
 })
