@@ -37,7 +37,6 @@ test.describe('Login Tests', () => {
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
         await expect(page).toHaveURL(/\/locations\/?$/, { timeout: 20000 })
         await loginPage.logoutUser()
-        // await page.waitForURL(/\/login\//, { timeout: 30000 })
         await expect(page).toHaveURL(/\/login\/?$/, { timeout: 20000 })
     })
 })
