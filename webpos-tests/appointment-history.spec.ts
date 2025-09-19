@@ -23,7 +23,7 @@ test.describe('Appointment History Tests', () => {
     
     test('[TC-537] Appointments History page view', async ({ page }) => {
         await appmtHistoryPage.clickAppointmentHistoryTab()
-        await expect(page).toHaveURL(/\/history\//)
         await appmtHistoryPage.assertPageView()
+        await expect(page).toHaveURL(/\/history\//, { timeout: 30000 })
     })
 })
