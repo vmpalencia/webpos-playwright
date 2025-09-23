@@ -8,7 +8,8 @@ export class AppointmentHistory {
     get pageTitle(): Locator { return this.page.getByText('Appointment List') }
     get rangeDropdown(): Locator { return this.page.locator('#demo-simple-select') }
     get statusDropdown(): Locator { return this.page.locator('#status-select')}
-    get fromDropdown(): Locator { return this.page.getByRole('textbox', { name: 'From'}) }
+    // get fromDropdown(): Locator { return this.page.getByRole('textbox', { name: 'From'}) }
+    get fromDropdown(): Locator { return this.page.getByPlaceholder('YYYY-MM-DD').nth(0) }
     get toDropdown(): Locator { return this.page.getByRole('textbox', { name: 'To', exact: true }) }
     get searchBar(): Locator { return this.page.getByPlaceholder('Search by Appointment ID# and Customer Name') }
     get appointmentID_column(): Locator { return this.page.getByRole('columnheader', { name: "Appointment ID"}) }
