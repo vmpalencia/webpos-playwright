@@ -14,7 +14,7 @@ test.describe('Appointment History Tests', () => {
         await expect(page).toHaveURL('/login/')
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
         await page.waitForURL(/\/locations\//, { timeout: 30000 })
-        // await expect(page).toHaveURL(/\/locations\/?$/, { timeout: 30_000 })
+        await expect(page).toHaveURL('/locations/')
         await loginPage.selectLocationOption()
         await appmtHistoryPage.clickAppointmentHistoryTab()
     })
