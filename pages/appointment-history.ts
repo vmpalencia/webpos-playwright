@@ -6,7 +6,7 @@ export class AppointmentHistory {
 
     // locators
     get pageTitle(): Locator { return this.page.getByText('Appointment List') }
-    get rangeDropdown(): Locator { return this.page.locator('#demo-simple-select-label') }
+    get rangeDropdown(): Locator { return this.page.locator('#demo-simple-select') }
     get statusDropdown(): Locator { return this.page.locator('#status-select')}
     get fromDropdown(): Locator { return this.page.getByRole('textbox', { name: 'From'}) }
     get toDropdown(): Locator { return this.page.getByRole('textbox', { name: 'To', exact: true }) }
@@ -17,9 +17,16 @@ export class AppointmentHistory {
     get dateFrom_column(): Locator { return this.page.getByRole('columnheader', { name: "Appointment ID"}) }
     get dateEnd_column(): Locator { return this.page.getByRole('columnheader', { name: "Appointment ID"}) }
     get source_column(): Locator { return this.page.getByRole('columnheader', { name: "Appointment ID"}) }
-    get appointmentRow(): Locator { return this.page.getByRole('row').first() }
-    get appointmentID(): Locator { return this.page.locator('div[data-field="id"]').first() }
+    get appointmentRow(): Locator { return this.page.getByRole('row').nth(1) }
+    get appointmentID(): Locator { return this.page.locator('div[data-field="id"]').nth(1) }
     get appointmentHistoryTab(): Locator { return this.page.getByRole('link', { name: 'Appointments History' }) }
+    get customerName(): Locator { return this.page.locator('[data-field="name"]').nth(1) }
+    
+    // Appointment Details Side Panel
+    get appointmentsTab(): Locator { return this.page.getByRole('tab', { name: 'Appointments'}) }
+    get customersTab(): Locator { return this.page.getByRole('tab', { name: 'Customer'}) }
+    get reassignBtn(): Locator { return this.page.getByRole('button', { name: 'Reassign'}) }
+    get contactInfo(): Locator { return this.page.locator('.css-1unk1dn') }
 
     async clickAppointmentHistoryTab(){
         await this.appointmentHistoryTab.click()
@@ -42,5 +49,30 @@ export class AppointmentHistory {
         await expect(this.appointmentID).toBeVisible()
         await expect(this.appointmentHistoryTab).toBeVisible()
     }
-    
+
+    async selectRange(option: string){
+        await this.rangeDropdown.click()
+        await this.page.getByRole('option', { name: option }).click()
+    }
+
+    async selectStatus(status: string){
+        await this.statusDropdown.click()
+        await this.page.getByRole('option', { name: status }).click()
+    }
+
+    async search(entry: string){
+        await this.searchBar.click()
+        await this.searchBar.fill(entry)
+    }
+
+    async openAppointmentDetails(){
+        await this.appointmentID.click()
+    }
+
+    async assertAppointmentDetailsPanel(){
+        await expect(this.appointmentsTab).toBeVisible()
+        await expect(this.customersTab).toBeVisible()
+        await expect(this.reassignBtn).toBeVisible()
+        await expect(this.contactInfo).toBeVisible()
+    }
 } 
