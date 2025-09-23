@@ -10,7 +10,7 @@ export class AppointmentHistory {
     get statusDropdown(): Locator { return this.page.locator('#status-select')}
     // get fromDropdown(): Locator { return this.page.getByRole('textbox', { name: 'From'}) }
     get fromDropdown(): Locator { return this.page.getByPlaceholder('YYYY-MM-DD').nth(0) }
-    get toDropdown(): Locator { return this.page.getByRole('textbox', { name: 'To', exact: true }) }
+    get toDropdown(): Locator { return this.page.getByPlaceholder('YYYY-MM-DD').nth(1) }
     get searchBar(): Locator { return this.page.getByPlaceholder('Search by Appointment ID# and Customer Name') }
     get appointmentID_column(): Locator { return this.page.getByRole('columnheader', { name: "Appointment ID"}) }
     get customer_column(): Locator { return this.page.getByRole('columnheader', { name: "Appointment ID"}) }
