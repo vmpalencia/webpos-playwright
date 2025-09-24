@@ -49,6 +49,7 @@ export class LoginPage {
     }
 
     async selectLocationOption(){
+        await expect(this.selectLocation).toBeVisible()
         await this.selectLocation.click()
     }
 }

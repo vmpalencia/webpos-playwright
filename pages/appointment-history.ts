@@ -7,7 +7,8 @@ export class AppointmentHistory {
     // locators
     get pageTitle(): Locator { return this.page.getByText('Appointment List') }
     get rangeDropdown(): Locator { return this.page.locator('#demo-simple-select') }
-    get statusDropdown(): Locator { return this.page.locator('#status-select')}
+    get statusDropdown(): Locator { return this.page.locator('#status-select') }
+    // get statusDropdown(): Locator { return this.page.getByRole('button', { name: 'Status' }) }
     // get fromDropdown(): Locator { return this.page.getByRole('textbox', { name: 'From'}) }
     get fromDropdown(): Locator { return this.page.getByPlaceholder('YYYY-MM-DD').nth(0) }
     get toDropdown(): Locator { return this.page.getByPlaceholder('YYYY-MM-DD').nth(1) }
@@ -30,6 +31,7 @@ export class AppointmentHistory {
     get contactInfo(): Locator { return this.page.locator('.css-1unk1dn') }
 
     async clickAppointmentHistoryTab(){
+        // await expect(this.appointmentHistoryTab).toBeVisible()
         await this.appointmentHistoryTab.click()
     }
 

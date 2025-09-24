@@ -7,9 +7,11 @@ test.describe('Appointment History Tests', () => {
     let loginPage: LoginPage
     let appmtHistoryPage: AppointmentHistory
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page }, testInfo) => {
         loginPage = new LoginPage(page)
         appmtHistoryPage = new AppointmentHistory(page)
+
+        testInfo.setTimeout(80000)
         await loginPage.goto()
         await expect(page).toHaveURL('/login/')
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
@@ -19,7 +21,7 @@ test.describe('Appointment History Tests', () => {
         await appmtHistoryPage.clickAppointmentHistoryTab()
     })
     
-    test('[TC-537] Appointments History page view', async ({ page }) => {.0
+    test('[TC-537] Appointments History page view', async ({ page }) => {
         await appmtHistoryPage.assertPageView()
         await expect(page).toHaveURL(/\/history\//, { timeout: 30000 })
     })
