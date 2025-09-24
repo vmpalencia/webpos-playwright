@@ -11,7 +11,7 @@ export class LoginPage {
     get errorMsg(): Locator { return this.page.locator('.css-18s5xoe') } // change
     get emailErrorMsg(): Locator { return this.page.getByText('email is a required field') }
     get passwordErrorMsg(): Locator { return this.page.getByText('password must be at least 5 characters') }
-    get locationBtn(): Locator { return this.page.getByText('Select') }
+    get locationBtn(): Locator { return this.page.getByText('Select').first() }
     get selectLocation(): Locator { return this.page.getByRole('button', { name: "Select"}).first() }
     get userAvatar(): Locator { return this.page.locator('.css-13ez59u') } // change
     get signOutBtn(): Locator { return this.page.getByRole('menuitem', { name: "Sign Out" })}
