@@ -15,6 +15,7 @@ export class LoginPage {
     get selectLocation(): Locator { return this.page.getByRole('button', { name: "Select"}).first() }
     get userAvatar(): Locator { return this.page.locator('.css-13ez59u') } // change
     get signOutBtn(): Locator { return this.page.getByRole('menuitem', { name: "Sign Out" })}
+    get siteLogo(): Locator { return this.page.getByRole('link', { name: 'byChronos byChronos' }) }
 
     async goto(){
         await this.page.goto('/login/') 
@@ -24,11 +25,8 @@ export class LoginPage {
     async login(email: string = "", password: string = ""){
         await this.emailField.fill(email)
         await this.passwordField.fill(password)
-        await Promise.all([
-            this.page.waitForNavigation({ waitUntil: 'networkidle' }),
-            this.loginBtn.click()
-        ])
-        await expect(this.locationBtn).toBeVisible({ timeout: 60000 })
+        this.loginBtn.click()
+        await expect(this.siteLogo).toBeVisible({ timeout: 60000 })
     }
 
     async clickLoginBtn(){
