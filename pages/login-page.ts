@@ -1,4 +1,5 @@
 import { type Locator, type Page, expect } from '@playwright/test'
+import { AppointmentHistory } from '../pages/appointment-history'
 
 export class LoginPage {
 
@@ -23,7 +24,7 @@ export class LoginPage {
         await this.emailField.fill(email)
         await this.passwordField.fill(password)
         await this.loginBtn.click()
-        await this.page.waitForSelector('.css-1s8xa5e', { timeout: 60000})
+        await expect(this.selectLocation).toBeVisible({ timeout: 60000 })
     }
 
     async clickLoginBtn(){
