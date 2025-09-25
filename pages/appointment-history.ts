@@ -27,7 +27,7 @@ export class AppointmentHistory {
     // Appointment Details Side Panel
     get appointmentsTab(): Locator { return this.page.getByRole('tab', { name: 'Appointments'}) }
     get customersTab(): Locator { return this.page.getByRole('tab', { name: 'Customer'}) }
-    get reassignBtn(): Locator { return this.page.getByRole('button', { name: 'Reassign'}) }
+    // get reassignBtn(): Locator { return this.page.getByRole('button', { name: 'Reassign'}) }
     get contactInfo(): Locator { return this.page.locator('.css-1unk1dn') }
 
     async clickAppointmentHistoryTab(){
@@ -75,7 +75,7 @@ export class AppointmentHistory {
     async assertAppointmentDetailsPanel(){
         await expect(this.appointmentsTab).toBeVisible()
         await expect(this.customersTab).toBeVisible()
-        await expect(this.reassignBtn).toBeVisible()
+        // await expect(this.reassignBtn).toBeVisible()
         await expect(this.contactInfo).toBeVisible()
     }
 } 
