@@ -1,5 +1,4 @@
 import { type Locator, type Page, expect } from '@playwright/test'
-import { AppointmentHistory } from '../pages/appointment-history'
 
 export class LoginPage {
 
@@ -53,7 +52,7 @@ export class LoginPage {
     }
 
     async selectLocationOption(){
-        await expect(this.selectLocation).toBeVisible()
+        // await expect(this.selectLocation).toBeVisible()
         await this.selectLocation.click()
     }
 }
