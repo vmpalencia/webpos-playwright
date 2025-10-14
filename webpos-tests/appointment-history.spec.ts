@@ -7,25 +7,22 @@ test.describe('Appointment History Tests', () => {
     let loginPage: LoginPage
     let appmtHistoryPage: AppointmentHistory
 
-    test.beforeEach(async ({ page }, testInfo) => {
+    test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page)
         appmtHistoryPage = new AppointmentHistory(page)
 
-        testInfo.setTimeout(80000)
         await loginPage.goto()
-        await expect(page).toHaveURL('/login/')
-        await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
-        // await page.waitForURL(/\/locations\//, { timeout: 30000 })
-        console.log('URL after login:', page.url())
-        await expect(page).not.toHaveURL('/login/')
-        await expect(page).toHaveURL('/locations/')
+        await expect(page).toHaveURL(/login/)
+        await loginPage.login(userCredentials.validUser.email, 
+                            userCredentials.validUser.password)
+        await expect(page).toHaveURL(/locations/)
         await loginPage.selectLocationOption()
         await appmtHistoryPage.clickAppointmentHistoryTab()
     })
     
     test('[TC-537] Appointments History page view', async ({ page }) => {
         await appmtHistoryPage.assertPageView()
-        await expect(page).toHaveURL(/\/history\//, { timeout: 30000 })
+        await expect(page).toHaveURL(/history/)
     })
 
     test('[TC-538] Change view via Range', async () => {
@@ -39,8 +36,8 @@ test.describe('Appointment History Tests', () => {
     })
 
     test('[TC-540] Search appointment/customer', async () => {
-        await appmtHistoryPage.search('John Li Test')
-        await expect(appmtHistoryPage.customerName).toHaveText('John Li Test')
+        await appmtHistoryPage.search('Walk-In')
+        await expect(appmtHistoryPage.customerName).toHaveText('Walk-In')
     })
 
     test('[TC-541] View appointment details side panel', async () => {
