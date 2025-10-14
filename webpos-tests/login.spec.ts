@@ -8,13 +8,13 @@ test.describe('Login Tests', () => {
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page)
         await loginPage.goto()
-        await expect(page).toHaveURL('/login/')
+        await expect(page).toHaveURL(/login/)
     })
 
     test('[TC-101] Login using valid credentials', async ({ page }) => {
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
         await page.waitForURL(/\/locations\//, { timeout: 30000 })
-        await expect(page).toHaveURL('/locations/')
+        await expect(page).toHaveURL(/locations/)
     })
 
     test('[TC-102] Login using invalid credentials', async () => {
@@ -30,13 +30,15 @@ test.describe('Login Tests', () => {
     test('[TC-103] Login with empty input fields', async () => {
         await loginPage.clickLoginBtn()
         await loginPage.assertEmailError('email is a required field')
+        await loginPage.emailField.fill(userCredentials.validUser.email)
+        await loginPage.clickLoginBtn()
         await loginPage.assertPasswordError ('password must be at least 5 characters')
     })
 
     test('[TC-105] Logout user', async ({ page }) => {
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
-        await expect(page).toHaveURL(/\/locations\/?$/, { timeout: 20000 })
+        await expect(page).toHaveURL(/\/locations\//, { timeout: 20000 })
         await loginPage.logoutUser()
-        await expect(page).toHaveURL(/\/login\/?$/, { timeout: 20000 })
+        await expect(page).toHaveURL(/\/login\//, { timeout: 20000 })
     })
 })

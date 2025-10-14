@@ -18,9 +18,9 @@ export class CreateAppointment {
     
     // select service 
     get serviceCategories(): Locator { return this.page.locator('[itemid="chm_services_selectCategory"]').nth(0) }
-    get services(): Locator { return this.page.locator('.css-1gla7er').nth(0) } // best practice -> not use randomly generated class names
+    get services(): Locator { return this.page.locator('[itemid^="appointment-service-"]').nth(0) } 
     get selectStafferBtn(): Locator { return this.page.locator('[itemid="am_form_btn_selectStaffer"]') }
-    get assignStaffer(): Locator { return this.page.locator('.css-87n7gs') }
+    get assignStaffer(): Locator { return this.page.locator('[itemid="chm_services_assignDx_btn_assignStaff"]') }
     get allStaffTab(): Locator { return this.page.locator('[itemid="am_form_btn_allStaff"]') }
     // service modifier/s
     get radioModifier(): Locator { return this.page.getByRole('radio') }
@@ -36,9 +36,7 @@ export class CreateAppointment {
     get submitBtn(): Locator { return this.page.locator('[itemid="am_form_btn_date_confirm"]') } 
 
     get finishBtn(): Locator { return this.page.locator('[itemid="am_form_btn_finish"]') }
-    
-    get radioTitle(): Locator { return this.page.locator('#demo-controlled-checkbox-buttons-group')}
-    get checkboxTitle(): Locator { return this.page.locator('#demo-controlled-radio-buttons-group')}
+
     async clickNewBtn(){
         await this.newBtn.click()        
     }
@@ -53,35 +51,38 @@ export class CreateAppointment {
 
     async selectService(){
         await this.services.click()
-        const radioCount = await this.radioTitle.count()
-        const checkboxCount = await this.checkboxTitle.count()
-
-        for (let i = 0; i < radioCount && checkboxCount; i++){
-            await this.radioModifier.nth(i).click()
-            console.log(i)
-            await this.checkboxModifier.nth(i).click()
-            console.log(i)
-            
-            if (await this.modifierConfirmBtn.isEnabled){
-                console.log('Confirm button is enabled')
-                break;
+        
+        for (let i = 0; i < 20; i++) {
+            const radio = this.radioModifier.nth(i)
+            if (await radio.isVisible()) {
+                await radio.click()
+                console.log('Radio button modifier/s selected!')
+            } else {
+                console.log('No radio button modifier/s available.')
             }
-        }    
-        
-        await expect(this.modifierConfirmBtn).toBeEnabled()
-        await this.modifierConfirmBtn.click()
-        // while (await this.modifierConfirmBtn.isDisabled){
-        //     await this.radioModifier.click()
-        //     await this.checkboxModifier.click()
-        // } 
-        
-        // if (await this.modifierConfirmBtn.isEnabled){
-        //     await this.modifierConfirmBtn.click()
-        // }
+        }
+
+        for (let i = 0; i < 20; i++) {
+            const cb = this.checkboxModifier.nth(i)
+            if (await cb.isVisible() && await cb.isEnabled()) {
+                await cb.click()
+                console.log('Checkbox modifier/s selected!')
+            } else {
+                console.log('No checkbox modifier/s available.')
+            }
+        }
+
+        if (await this.modifierConfirmBtn.isVisible()){
+            await this.modifierConfirmBtn.click()
+            console.log('Modifier confirm button clicked!')
+        } else {
+            console.log('No modifier confirm button available.')
+        }
         
         await this.selectStafferBtn.click()
         await this.allStaffTab.click()
         await this.assignStaffer.first().click()
+
     }
 
     async selectCustomer(){

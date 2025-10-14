@@ -21,11 +21,10 @@ export class LoginPage {
         await expect(this.loginBtn).toBeVisible()
     }
 
-    async login(email: string = "", password: string = ""){
+    async login(email: string, password: string){
         await this.emailField.fill(email)
         await this.passwordField.fill(password)
-        this.loginBtn.click()
-        // await expect(this.siteLogo).toBeVisible({ timeout: 60000 })
+        await this.loginBtn.click()
     }
 
     async clickLoginBtn(){
@@ -52,7 +51,6 @@ export class LoginPage {
     }
 
     async selectLocationOption(){
-        // await expect(this.selectLocation).toBeVisible()
         await this.selectLocation.click()
     }
 }

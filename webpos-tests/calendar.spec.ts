@@ -12,18 +12,17 @@ test.describe('Calendar Tests', () => {
         createAppointment = new CreateAppointment(page)
 
         await loginPage.goto()
-        await expect(page).toHaveURL('/login/')
-        await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
-        // console.log('URL after login:', page.url())
-        // await expect.soft(page).toHaveURL('/\/locations/')
-        // await expect(page).not.toHaveURL('/\/login/')
+        await expect(page).toHaveURL(/login/)
+        await loginPage.login(userCredentials.validUser.email, 
+                            userCredentials.validUser.password)
+        await expect(page).toHaveURL(/locations/)
         await loginPage.selectLocationOption()
     })
     
     test('Create Appointment', async () => {
         await createAppointment.clickNewBtn()
         await createAppointment.clickAppointmentOption()
-        // await createAppointment.selectServiceCategory()
+        await createAppointment.selectServiceCategory()
         await createAppointment.selectService()
         await createAppointment.selectCustomer()
         await createAppointment.selectDate()
