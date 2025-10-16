@@ -8,13 +8,14 @@ test.describe('Login Tests', () => {
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page)
         await loginPage.goto()
+        await page.waitForLoadState('networkidle')
         await expect(page).toHaveURL(/login/)
     })
 
     test('[TC-101] Login using valid credentials', async ({ page }) => {
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
         await page.waitForURL(/\/locations\//, { timeout: 30000 })
-        await expect(page).toHaveURL(/locations/)
+        await expect(page).toHaveURL(/\/locations\//)
     })
 
     test('[TC-102] Login using invalid credentials', async () => {

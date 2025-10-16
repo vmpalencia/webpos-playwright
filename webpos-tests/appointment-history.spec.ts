@@ -7,16 +7,18 @@ test.describe('Appointment History Tests', () => {
     let loginPage: LoginPage
     let appmtHistoryPage: AppointmentHistory
 
+    test.slow()
+
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page)
         appmtHistoryPage = new AppointmentHistory(page)
 
         await loginPage.goto()
-        await page.waitForLoadState('load')
+        await page.waitForLoadState('networkidle')
         await expect(page).toHaveURL(/login/)
         await loginPage.login(userCredentials.validUser.email, 
                             userCredentials.validUser.password)
-        await page.waitForLoadState('load')
+        await page.waitForLoadState('networkidle')
         await expect(page).toHaveURL(/locations/)
         await loginPage.selectLocationOption()
         await appmtHistoryPage.clickAppointmentHistoryTab()

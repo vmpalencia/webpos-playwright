@@ -12,9 +12,11 @@ test.describe('Calendar Tests', () => {
         createAppointment = new CreateAppointment(page)
 
         await loginPage.goto()
+        await page.waitForLoadState('networkidle')
         await expect(page).toHaveURL(/login/)
         await loginPage.login(userCredentials.validUser.email, 
                             userCredentials.validUser.password)
+        await page.waitForLoadState('networkidle')
         await expect(page).toHaveURL(/locations/)
         await loginPage.selectLocationOption()
     })
