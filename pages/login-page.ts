@@ -25,9 +25,15 @@ export class LoginPage {
         await this.emailField.fill(email)
         await this.passwordField.fill(password)
         await Promise.all([
-            this.page.waitForNavigation({ url: /locations/ }),
+            this.page.waitForURL(/locations/, { timeout: 15000 }),
             this.loginBtn.click()
         ])
+    }
+
+    async invalidLogin(email: string, password: string){
+        await this.emailField.fill(email)
+        await this.passwordField.fill(password)
+        this.loginBtn.click()
     }
 
     async clickLoginBtn(){
