@@ -7,8 +7,6 @@ test.describe('Appointment History Tests', () => {
     let loginPage: LoginPage
     let appmtHistoryPage: AppointmentHistory
 
-    test.slow()
-
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page)
         appmtHistoryPage = new AppointmentHistory(page)
