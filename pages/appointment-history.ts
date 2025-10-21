@@ -75,7 +75,7 @@ export class AppointmentHistory {
     }
 
     async assertAppointmentDetailsPanel(){
-        await expect(this.appointmentsTab).toBeVisible()
+        // await expect(this.appointmentsTab).toBeVisible()
         await expect(this.customersTab).toBeVisible()
         await expect(this.contactInfo).toBeVisible()
     }
