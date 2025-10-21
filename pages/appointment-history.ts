@@ -8,8 +8,6 @@ export class AppointmentHistory {
     get pageTitle(): Locator { return this.page.getByText('Appointment List') }
     get rangeDropdown(): Locator { return this.page.locator('#demo-simple-select') }
     get statusDropdown(): Locator { return this.page.locator('#status-select') }
-    // get statusDropdown(): Locator { return this.page.getByRole('button', { name: 'Status' }) }
-    // get fromDropdown(): Locator { return this.page.getByRole('textbox', { name: 'From'}) }
     get fromDropdown(): Locator { return this.page.getByPlaceholder('YYYY-MM-DD').nth(0) }
     get toDropdown(): Locator { return this.page.getByPlaceholder('YYYY-MM-DD').nth(1) }
     get searchBar(): Locator { return this.page.getByPlaceholder('Search by Appointment ID# and Customer Name') }
@@ -23,16 +21,20 @@ export class AppointmentHistory {
     get appointmentID(): Locator { return this.page.locator('div[data-field="id"]').nth(1) }
     get appointmentHistoryTab(): Locator { return this.page.getByRole('link', { name: 'Appointments History' }) }
     get customerName(): Locator { return this.page.locator('[data-field="name"]').nth(1) }
+    get appointmentsTab(): Locator { return this.page.getByRole('list').getByRole('link', { name: 'Appointments'}).nth(0) }
     
     // Appointment Details Side Panel
-    get appointmentsTab(): Locator { return this.page.getByRole('tab', { name: 'Appointments'}) }
+    get appointmentsActivitiesTab(): Locator { return this.page.getByRole('tab', { name: 'Appointments'}) }
     get customersTab(): Locator { return this.page.getByRole('tab', { name: 'Customer'}) }
-    // get reassignBtn(): Locator { return this.page.getByRole('button', { name: 'Reassign'}) }
     get contactInfo(): Locator { return this.page.locator('.css-1unk1dn') }
-
+    get updateBtn(): Locator { return this.page.locator('[itemid="am_details_common_btn_update"]')}
+    
     async clickAppointmentHistoryTab(){
-        // await expect(this.appointmentHistoryTab).toBeVisible()
         await this.appointmentHistoryTab.click()
+    }
+
+    async clickAppointmentsTab(){
+        await this.appointmentsTab.click()
     }
 
     async assertPageView(){
@@ -75,7 +77,10 @@ export class AppointmentHistory {
     async assertAppointmentDetailsPanel(){
         await expect(this.appointmentsTab).toBeVisible()
         await expect(this.customersTab).toBeVisible()
-        // await expect(this.reassignBtn).toBeVisible()
         await expect(this.contactInfo).toBeVisible()
+    }
+
+    async clickUpdateBtn(){
+        await this.updateBtn.click()
     }
 } 

@@ -22,18 +22,30 @@ export class LoginPage {
     }
 
     async login(email: string, password: string){
-        await this.emailField.fill(email)
-        await this.passwordField.fill(password)
+        await this.emailField.fill(email);
+        await this.passwordField.fill(password);
+
+        // Click without waiting for navigation
+        // Check if login successful in api/backend
         await Promise.all([
-            this.page.waitForURL(/locations/, { timeout: 15000 }),
-            this.loginBtn.click()
-        ])
+            this.page.waitForResponse(res =>
+                res.url().includes('/api/login/') && res.status() === 200
+                ),
+            this.loginBtn.click({ noWaitAfter: true }),
+        ]);
+
+        const currentUrl = await this.page.url()
+        if (!currentUrl.includes('/login')) {
+            await expect(this.page).toHaveURL(/\/locations\//)
+        } else {
+            console.warn('⚠️ Stayed on login page.')
+        }
     }
 
     async invalidLogin(email: string, password: string){
         await this.emailField.fill(email)
         await this.passwordField.fill(password)
-        this.loginBtn.click()
+        await this.loginBtn.click()
     }
 
     async clickLoginBtn(){

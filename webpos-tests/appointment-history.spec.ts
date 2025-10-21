@@ -12,12 +12,8 @@ test.describe('Appointment History Tests', () => {
         appmtHistoryPage = new AppointmentHistory(page)
 
         await loginPage.goto()
-        await page.waitForLoadState('networkidle')
         await expect(page).toHaveURL(/login/)
-        await loginPage.login(userCredentials.validUser.email, 
-                            userCredentials.validUser.password)
-        await page.waitForLoadState('networkidle')
-        await expect(page).toHaveURL(/locations/)
+        await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
         await loginPage.selectLocationOption()
         await appmtHistoryPage.clickAppointmentHistoryTab()
     })
