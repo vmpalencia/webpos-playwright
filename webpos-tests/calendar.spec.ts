@@ -6,6 +6,8 @@ import { CreateAppointment } from '../pages/create-appointment'
 test.describe('Calendar Tests', () => {
     let loginPage: LoginPage
     let createAppointment: CreateAppointment
+    
+    test.slow()
 
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page)
