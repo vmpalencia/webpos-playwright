@@ -12,7 +12,7 @@ export class LoginPage {
     get passwordErrorMsg(): Locator { return this.page.getByText('password must be at least 5 characters') }
     get locationBtn(): Locator { return this.page.getByText('Select').first() }
     get selectLocation(): Locator { return this.page.getByRole('button', { name: "Select"}).first() }
-    get userAvatar(): Locator { return this.page.locator('.css-13ez59u') } // change
+    get userAvatar(): Locator { return this.page.getByRole('banner').locator('span').nth(1) } 
     get signOutBtn(): Locator { return this.page.getByRole('menuitem', { name: "Sign Out" })}
     get siteLogo(): Locator { return this.page.getByRole('link', { name: 'byChronos byChronos' }) }
 
@@ -72,7 +72,7 @@ export class LoginPage {
     }
 
     async selectLocationOption(){
-        await this.page.waitForSelector('button:has-text("Select")', { state: 'visible', timeout: 60000 })
+        await expect(this.locationBtn).toBeVisible()
         await this.selectLocation.click()
     }
 }
