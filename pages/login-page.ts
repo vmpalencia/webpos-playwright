@@ -72,6 +72,7 @@ export class LoginPage {
     }
 
     async selectLocationOption(){
+        await this.page.waitForSelector('button:has-text("Select")', { state: 'visible', timeout: 60000 })
         await this.selectLocation.click()
     }
 }
