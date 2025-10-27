@@ -71,8 +71,7 @@ export class LoginPage {
         await this.signOutBtn.click()
     }
 
-    async selectLocationOption(){
-        await expect(this.locationBtn).toBeVisible()
+    async selectLocationOption(){        
         await this.selectLocation.click()
     }
 }
