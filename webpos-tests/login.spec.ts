@@ -11,7 +11,7 @@ test.describe('Login Tests', () => {
         await expect(page).toHaveURL(/login/)
     })
 
-    test('[TC-101] Login using valid credentials', async ({ page }) => {
+    test('[TC-101] Login using valid credentials', async () => {
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)        
     })
 
@@ -30,7 +30,7 @@ test.describe('Login Tests', () => {
         await loginPage.assertEmailError('email is a required field')
         await loginPage.emailField.fill(userCredentials.validUser.email)
         await loginPage.clickLoginBtn()
-        await loginPage.assertPasswordError ('password must be at least 5 characters')
+        await loginPage.assertPasswordError('password must be at least 5 characters')
     })
 
     test('[TC-105] Logout user', async ({ page }) => {

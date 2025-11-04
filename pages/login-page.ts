@@ -22,8 +22,8 @@ export class LoginPage {
     }
 
     async login(email: string, password: string){
-        await this.emailField.fill(email);
-        await this.passwordField.fill(password);
+        await this.emailField.fill(email)
+        await this.passwordField.fill(password)
 
         // Click without waiting for navigation
         // Check if login successful in api/backend
@@ -32,7 +32,7 @@ export class LoginPage {
                 res.url().includes('/api/login/') && res.status() === 200
                 ),
             this.loginBtn.click({ noWaitAfter: true }),
-        ]);
+        ])
 
         const currentUrl = await this.page.url()
         if (!currentUrl.includes('/login')) {

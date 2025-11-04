@@ -4,15 +4,6 @@ export class CreateAppointment {
     
     constructor(private readonly page: Page){}
 
-    /*
-    await page
-    .getByRole('listitem')
-    .filter({ hasText: 'Product 2' })
-    .getByRole('button', { name: 'Add to cart' })
-    .click();
-    */
-
-    // locators
     get newBtn(): Locator { return this.page.locator('[itemid="am_calendar_hdr_btn_new"]') }
     get cadAppointment(): Locator { return this.page.locator('[itemid="cad_appointment"]') }
     
@@ -36,6 +27,12 @@ export class CreateAppointment {
     get submitBtn(): Locator { return this.page.locator('[itemid="am_form_btn_date_confirm"]') } 
 
     get finishBtn(): Locator { return this.page.locator('[itemid="am_form_btn_finish"]') }
+
+    get validCell(): Locator { return this.page.locator('.fc-non-business').first()}
+    
+    async clickValidCell(){
+        await this.validCell.click()
+    }
 
     async clickNewBtn(){
         await this.newBtn.click()        
