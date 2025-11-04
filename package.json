@@ -9,6 +9,10 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.55.0",
-    "@types/node": "^24.3.0"
+    "@types/node": "^24.3.0",
+    "@zerostep/playwright": "^0.1.5"
+  },
+  "dependencies": {
+    "zerostep": "^1.2.1"
   }
 }

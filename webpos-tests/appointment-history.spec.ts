@@ -11,15 +11,10 @@ test.describe('Appointment History Tests', () => {
         loginPage = new LoginPage(page)
         appmtHistoryPage = new AppointmentHistory(page)
 
-        console.log('→ Navigating to login page')
         await loginPage.goto()
-        console.log('→ Checking URL')
         await expect(page).toHaveURL(/login/)
-        console.log('→ Logging in')
         await loginPage.login(userCredentials.validUser.email, userCredentials.validUser.password)
-        console.log('→ Selecting location')
         await loginPage.selectLocationOption()
-        console.log('→ Clicking Appointment History tab')
         await appmtHistoryPage.clickAppointmentHistoryTab()
     })
     
