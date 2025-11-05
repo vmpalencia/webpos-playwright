@@ -22,7 +22,7 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npx playwright test --reporter=github --trace on
+        run: npx playwright test --project=chromium --reporter=github --trace on
         env: 
           BASE_URL: ${{ secrets.BASE_URL }}
           ZEROSTEP_API_KEY: ${{ secrets.ZEROSTEP_API_KEY }}
