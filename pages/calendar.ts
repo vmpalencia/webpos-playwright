@@ -4,9 +4,8 @@ export class Calendar {
 
     constructor(private readonly page: Page){}
 
-    get appointmentBlock(): Locator { return this.page.locator
-        ('.fc-event.fc-event-draggable, .fc-event[href]') }
-
+    get appointmentBlock(): Locator { return this.page.locator('.fc-v-event') }
+    get availableAppointmentBlock(): Locator { return this.page.locator('.fc-v-event:not([style*="149, 161, 216"]):not([style*="218, 238, 231"])') }
     // === activities modal
     get activitiesModalTitle(): Locator { return this.page.getByRole('heading', { name: 'Activities' }) }
     get reassignBtn(): Locator { return this.page.getByRole('button', { name: 'Reassign' }) }
@@ -33,8 +32,8 @@ export class Calendar {
     get closeStatusOption(): Locator { return this.page.getByRole('menuitem', { name: 'Close' }) }
 
     // methods 
-    async clickAppointmentBlock(num: number){
-        await this.appointmentBlock.nth(num).click()
+    async clickAppointmentBlock(){
+        await this.availableAppointmentBlock.nth(0).click()
     }
 
     async verifyActivitiesModal(){

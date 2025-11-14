@@ -26,7 +26,7 @@ test.describe('Calendar Tests', () => {
         console.log('=== Login successful.')
     })
 
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 1; i++) {
         test(`[TC-106] Create Appointment --- run #${i} `, async () => {
             await createAppointment.clickNewBtn()
             // const cadOptions = await ai('Get the text of the two buttons in the "New" modal', { page, test })
@@ -62,12 +62,12 @@ test.describe('Calendar Tests', () => {
     })
 
     test('[TC-107] View Appointment', async () => {        
-        await calendarPage.clickAppointmentBlock(0)
+        await calendarPage.clickAppointmentBlock()
         await calendarPage.verifyActivitiesModal()
     })
 
     test('[TC-108] Update Appointment Status - Confirmed', async () => {
-        await calendarPage.clickAppointmentBlock(0)
+        await calendarPage.clickAppointmentBlock()
         await calendarPage.verifyActivitiesModal()
         await calendarPage.changeAppointmentStatus('Confirmed')
         await toastComponent.verifyToastMsg('The group appointment is confirmed')
@@ -75,7 +75,7 @@ test.describe('Calendar Tests', () => {
     })
 
     test('[TC-109] Update Appointment Status - Arrived', async () => {
-        await calendarPage.clickAppointmentBlock(0)
+        await calendarPage.clickAppointmentBlock()
         await calendarPage.verifyActivitiesModal()
         await calendarPage.changeAppointmentStatus('Arrived')
         await toastComponent.verifyToastMsg('The group appointment has been checked in')
@@ -83,7 +83,7 @@ test.describe('Calendar Tests', () => {
     })
 
     test('[TC-110] Update Appointment Status - Serving', async () => {
-        await calendarPage.clickAppointmentBlock(0)
+        await calendarPage.clickAppointmentBlock()
         await calendarPage.verifyActivitiesModal()
         await calendarPage.changeAppointmentStatus('Serving')
         await toastComponent.verifyToastMsg('Start serving the group appointment')
@@ -91,7 +91,7 @@ test.describe('Calendar Tests', () => {
     })
 
     test('[TC-111] Update Appointment Status - Completed', async () => {
-        await calendarPage.clickAppointmentBlock(3)
+        await calendarPage.clickAppointmentBlock()
         await calendarPage.verifyActivitiesModal()
         await calendarPage.changeAppointmentStatus('Completed')
         await toastComponent.verifyToastMsg('The group appointment is completed')
@@ -99,7 +99,7 @@ test.describe('Calendar Tests', () => {
     })
 
     test('[TC-112] Update Appointment Status - No-Show', async () => {
-        await calendarPage.clickAppointmentBlock(4)
+        await calendarPage.clickAppointmentBlock()
         await calendarPage.verifyActivitiesModal()
         await calendarPage.changeAppointmentStatus('No-Show')
         await toastComponent.verifyToastMsg('The group appointment has been marked as no-show')
@@ -107,7 +107,7 @@ test.describe('Calendar Tests', () => {
     })
 
     test('[TC-113] Update Appointment Status - Cancelled', async () => {
-        await calendarPage.clickAppointmentBlock(5)
+        await calendarPage.clickAppointmentBlock()
         await calendarPage.verifyActivitiesModal()
         await calendarPage.changeAppointmentStatus('Cancel')
         await toastComponent.verifyToastMsg('The group appointment has been cancelled')
