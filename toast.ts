@@ -6,7 +6,8 @@ export class ToastComponent {
 
     get toastMessage(): Locator { return this.page.locator('[aria-live="polite"]')}
     
-    async verifyMessage(expectedMsg: string){
+    async verifyToastMsg(expectedMsg: string){
+        await expect(this.toastMessage).toBeVisible()
         await expect(this.toastMessage).toHaveText(expectedMsg)
     }
 

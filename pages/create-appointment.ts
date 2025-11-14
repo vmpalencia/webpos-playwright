@@ -8,7 +8,7 @@ export class CreateAppointment {
     get cadAppointment(): Locator { return this.page.locator('[itemid="cad_appointment"]') }
     
     // select service 
-    get serviceCategories(): Locator { return this.page.locator('[itemid="chm_services_selectCategory"]').nth(0) }
+    get serviceCategories(): Locator { return this.page.locator('[itemid="chm_services_selectCategory"]').nth(3) }
     get services(): Locator { return this.page.locator('[itemid^="appointment-service-"]').nth(0) } 
     get selectStafferBtn(): Locator { return this.page.locator('[itemid="am_form_btn_selectStaffer"]') }
     get assignStaffer(): Locator { return this.page.locator('[itemid="chm_services_assignDx_btn_assignStaff"]') }
@@ -26,10 +26,16 @@ export class CreateAppointment {
     get selectDateBtn(): Locator { return this.page.getByRole('heading', { name: 'Select Date'}) }
     get submitBtn(): Locator { return this.page.locator('[itemid="am_form_btn_date_confirm"]') } 
 
-    get finishBtn(): Locator { return this.page.locator('[itemid="am_form_btn_finish"]') }
+    // add memo
+    get memoIcon(): Locator { return this.page.locator('[itemid="am_form_note_btn_edit"]') }
+    get memoField(): Locator { return this.page.locator('[itemid="am_form_noteDx_tf_note"]')}
+    get memoSubmitBtn(): Locator { return this.page.locator('[itemid="am_form_noteDx_btn_submit"]') }
 
-    get validCell(): Locator { return this.page.locator('.fc-non-business').first()}
+    get finishBtn(): Locator { return this.page.locator('[itemid="am_form_btn_finish"]') }
     
+    // calendar shortcut
+    get validCell(): Locator { return this.page.locator('.fc-non-business').first()}
+
     async clickValidCell(){
         await this.validCell.click()
     }
@@ -46,10 +52,21 @@ export class CreateAppointment {
         await this.serviceCategories.click()
     }
 
+    async addMemo(memoText: string){
+        await this.memoIcon.click()
+        await this.memoField.fill(memoText)
+        await this.memoSubmitBtn.click()
+    }
+
     async selectService(){
         await this.services.click()
+
+        const radioCount = await this.radioModifier.count()
+        console.log('Radio Count: ' +radioCount)
+        const checkboxCount = await this.checkboxModifier.count()
+        console.log('Checkbox Count: ' +checkboxCount)
         
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < radioCount; i++) {
             const radio = this.radioModifier.nth(i)
             if (await radio.isVisible()) {
                 await radio.click()
@@ -59,7 +76,7 @@ export class CreateAppointment {
             }
         }
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < checkboxCount; i++) {
             const cb = this.checkboxModifier.nth(i)
             if (await cb.isVisible() && await cb.isEnabled()) {
                 await cb.click()
