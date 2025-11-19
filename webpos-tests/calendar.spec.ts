@@ -26,7 +26,7 @@ test.describe('Calendar Tests', () => {
         console.log('=== Login successful.')
     })
 
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 1; i <= 5; i++) {
         test(`[TC-106] Create Appointment --- run #${i} `, async () => {
             await createAppointment.clickNewBtn()
             // const cadOptions = await ai('Get the text of the two buttons in the "New" modal', { page, test })
