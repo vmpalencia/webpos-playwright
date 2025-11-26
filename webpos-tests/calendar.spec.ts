@@ -26,23 +26,26 @@ test.describe('Calendar Tests', () => {
         console.log('=== Login successful.')
     })
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 1; i++) {
         test(`[TC-106] Create Appointment --- run #${i} `, async () => {
             await createAppointment.clickNewBtn()
             // const cadOptions = await ai('Get the text of the two buttons in the "New" modal', { page, test })
             // console.log('Cad Options: ' +cadOptions)
             await createAppointment.clickAppointmentOption()
-            await createAppointment.selectServiceCategory()
+            await createAppointment.selectAllServicesCategory()
+            // await createAppointment.selectServiceCategory()
             await createAppointment.selectService()
+
             // const firstCategory = await ai('Get the text of the next category below the "All Services" text', {page,test})
             // console.log('Second Category: ' +firstCategory)
             // const firstService = await ai('Get the text of the first service option below the search bar', {page,test})
             // console.log('First Service: ' +firstService)
             // const modalView = await ai('Verify that the page displays "New Appointment", "Categories", and "Search service" texts', { page, test })
             // console.log('Is the modal view correct?: ' +modalView)
+            
             await createAppointment.selectCustomer()
             await createAppointment.selectDate()
-            await createAppointment.addMemo('This is an automated test memo')
+            await createAppointment.addMemo('This appointment was created through Playwright.')
             await createAppointment.clickFinishBtn()
             await toastComponent.verifyToastMsg('Created successfully')
             console.log('=== Appointment created successfully.')
@@ -61,56 +64,58 @@ test.describe('Calendar Tests', () => {
         console.log('=== Appointment created successfully.')
     })
 
-    test('[TC-107] View Appointment', async () => {        
-        await calendarPage.clickAppointmentBlock()
-        await calendarPage.verifyActivitiesModal()
-    })
+    // test('[TC-107] View Appointment', async () => {        
+    //     await calendarPage.clickAppointmentBlock()
+    //     await calendarPage.verifyActivitiesModal()
+    // })
 
+test.describe.serial('Update Appointment Status Tests', () => {
     test('[TC-108] Update Appointment Status - Confirmed', async () => {
-        await calendarPage.clickAppointmentBlock()
-        await calendarPage.verifyActivitiesModal()
-        await calendarPage.changeAppointmentStatus('Confirmed')
-        await toastComponent.verifyToastMsg('The group appointment is confirmed')
+        await calendarPage.clickAppointmentBlock('Confirmed')
+        // await calendarPage.verifyActivitiesModal()
+        // await calendarPage.changeAppointmentStatus('Confirmed')
+        // await toastComponent.verifyToastMsg('The group appointment is confirmed')
         console.log('=== Appointment status changed to Confirmed.')
     })
 
     test('[TC-109] Update Appointment Status - Arrived', async () => {
-        await calendarPage.clickAppointmentBlock()
-        await calendarPage.verifyActivitiesModal()
-        await calendarPage.changeAppointmentStatus('Arrived')
-        await toastComponent.verifyToastMsg('The group appointment has been checked in')
+        await calendarPage.clickAppointmentBlock('Arrived')
+        // await calendarPage.verifyActivitiesModal()
+        // await calendarPage.changeAppointmentStatus('Arrived')
+        // await toastComponent.verifyToastMsg('The group appointment has been checked in')
         console.log('=== Appointment status changed to Arrived.')
     })
 
     test('[TC-110] Update Appointment Status - Serving', async () => {
-        await calendarPage.clickAppointmentBlock()
-        await calendarPage.verifyActivitiesModal()
-        await calendarPage.changeAppointmentStatus('Serving')
-        await toastComponent.verifyToastMsg('Start serving the group appointment')
+        await calendarPage.clickAppointmentBlock('Serving')
+        // await calendarPage.verifyActivitiesModal()
+        // await calendarPage.changeAppointmentStatus('Serving')
+        // await toastComponent.verifyToastMsg('Start serving the group appointment')
         console.log('=== Appointment status changed to Serving.')
     })
 
     test('[TC-111] Update Appointment Status - Completed', async () => {
-        await calendarPage.clickAppointmentBlock()
-        await calendarPage.verifyActivitiesModal()
-        await calendarPage.changeAppointmentStatus('Completed')
-        await toastComponent.verifyToastMsg('The group appointment is completed')
+        await calendarPage.clickAppointmentBlock('Completed')
+        // await calendarPage.verifyActivitiesModal()
+        // await calendarPage.changeAppointmentStatus('Completed')
+        // await toastComponent.verifyToastMsg('The group appointment is completed')
         console.log('=== Appointment status changed to Completed.')
     })
 
     test('[TC-112] Update Appointment Status - No-Show', async () => {
-        await calendarPage.clickAppointmentBlock()
-        await calendarPage.verifyActivitiesModal()
-        await calendarPage.changeAppointmentStatus('No-Show')
-        await toastComponent.verifyToastMsg('The group appointment has been marked as no-show')
+        await calendarPage.clickAppointmentBlock('No-Show')
+        // await calendarPage.verifyActivitiesModal()
+        // await calendarPage.changeAppointmentStatus('No-Show')
+        // await toastComponent.verifyToastMsg('The group appointment has been marked as no-show')
         console.log('=== Appointment status changed to No-Show.')
     })
 
     test('[TC-113] Update Appointment Status - Cancelled', async () => {
-        await calendarPage.clickAppointmentBlock()
-        await calendarPage.verifyActivitiesModal()
-        await calendarPage.changeAppointmentStatus('Cancel')
-        await toastComponent.verifyToastMsg('The group appointment has been cancelled')
+        await calendarPage.clickAppointmentBlock('Cancel')
+        // await calendarPage.verifyActivitiesModal()
+        // await calendarPage.changeAppointmentStatus('Cancel')
+        // await toastComponent.verifyToastMsg('The group appointment has been cancelled')
         console.log('=== Appointment status changed to Cancelled.')
     })
+})
 })

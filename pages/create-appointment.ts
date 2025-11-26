@@ -9,10 +9,13 @@ export class CreateAppointment {
     
     // select service 
     get serviceCategories(): Locator { return this.page.locator('[itemid="chm_services_selectCategory"]').nth(3) }
+    get allServicesCategory(): Locator { return this.page.locator('[itemid="am_form_btn_selectAllService"]') }
     get services(): Locator { return this.page.locator('[itemid^="appointment-service-"]').nth(0) } 
     get selectStafferBtn(): Locator { return this.page.locator('[itemid="am_form_btn_selectStaffer"]') }
     get assignStaffer(): Locator { return this.page.locator('[itemid="chm_services_assignDx_btn_assignStaff"]') }
     get allStaffTab(): Locator { return this.page.locator('[itemid="am_form_btn_allStaff"]') }
+    get serviceOptionTitle(): Locator { return this.page.locator('[id="Select service option"]') }
+    get serviceOption(): Locator { return this.page.locator('.css-bwb7tk').nth(0) }
     // service modifier/s
     get radioModifier(): Locator { return this.page.getByRole('radio') }
     get checkboxModifier(): Locator { return this.page.getByRole('checkbox') }
@@ -58,6 +61,10 @@ export class CreateAppointment {
         await this.memoSubmitBtn.click()
     }
 
+    async selectAllServicesCategory(){
+        await this.allServicesCategory.click()
+    }
+
     async selectService(){
         await this.services.click()
 
@@ -65,6 +72,8 @@ export class CreateAppointment {
         console.log('Radio Count: ' +radioCount)
         const checkboxCount = await this.checkboxModifier.count()
         console.log('Checkbox Count: ' +checkboxCount)
+        const serviceOptionCount = await this.serviceOption.count()
+        console.log('Service Option Count: ' +serviceOptionCount)
         
         for (let i = 0; i < radioCount; i++) {
             const radio = this.radioModifier.nth(i)
@@ -91,6 +100,13 @@ export class CreateAppointment {
             console.log('Modifier confirm button clicked!')
         } else {
             console.log('No modifier confirm button available.')
+        }
+
+        if (await this.serviceOptionTitle.isVisible()){
+            await this.serviceOption.click()
+            console.log('Service option selected!')
+        } else {
+            console.log('No service option/s available.')
         }
         
         await this.selectStafferBtn.click()
